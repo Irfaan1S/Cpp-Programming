@@ -20,7 +20,7 @@ int main(){
     int n;
     cin>>n;
     
-    cout<<computeXOR(n)<<endl;;
+    cout<<computeXOR(n)<<endl;
     
     return 0;
 }
