@@ -1,0 +1,53 @@
+#include<iostream>
+using namespace std;
+
+class student{
+    
+    string name;
+
+    public:
+    int age;
+    bool gender;
+
+    student(){
+        cout<<"Default constructor"<<endl;
+    }                                 
+    
+    student (string s,int a,int g){
+        cout<<"Parameterised constructor"<<endl;
+        name = s;
+        age = a;
+        gender = g;
+    }                       
+    student(student &a){
+        cout<<"Copy Constructor"<<endl;
+        name = a.name;
+        age = a.age;
+        gender = a.gender;
+    }
+
+    void setName(string s){     
+        name = s;
+    }
+    
+    void getName(){
+        cout<<name<<endl;   
+    }
+    void printInfo(){
+        cout<<"Name=";
+        cout<<name<<endl;
+        cout<<"Age=";
+        cout<<age<<endl;
+        cout<<"Gender=";
+        cout<<gender<<endl;
+    }
+};
+
+int main(){
+    
+    student a("Urvi",20,1);
+    student b;
+    student c = a;
+
+    return 0;
+}
