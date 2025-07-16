@@ -1,0 +1,31 @@
+name: Rename files without extension to .cpp (recursive)
+
+on:
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Rename files without extension to .cpp
+        run: |
+          echo "🔍 Finding files without extensions..."
+          find . -type f ! -name "*.*" | while read file; do
+            new="${file}.cpp"
+            if [ -f "$file" ]; then
+              echo "➡️ Renaming: $file → $new"
+              mv "$file" "$new" || echo "❌ Failed to rename: $file"
+            fi
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "🔄 Auto-renamed files without extension to .cpp" || echo "✅ No changes to commit"
+          git push
