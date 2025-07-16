@@ -1,7 +1,7 @@
 name: Rename files without extension to .cpp (recursive)
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
 
 jobs:
   rename:
@@ -11,9 +11,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # IMPORTANT: Needed for git push
+          fetch-depth: 0  # Required for git push
 
       - name: Rename files without extension to .cpp
+        working-directory: ${{ github.workspace }}
         run: |
           echo "🔍 Finding files without extensions..."
           find . -type f ! -name "*.*" | while read file; do
@@ -25,6 +26,7 @@ jobs:
           done
 
       - name: Commit and push changes
+        working-directory: ${{ github.workspace }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
