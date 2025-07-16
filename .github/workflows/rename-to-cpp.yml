@@ -1,0 +1,26 @@
+name: Rename all files to .cpp
+
+on:
+  workflow_dispatch:  # Run manually from the Actions tab
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Rename all files without extension to .cpp
+        run: |
+          find . -type f ! -name "*.*" | while read file; do
+            mv "$file" "${file}.cpp"
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Renamed files without extension to .cpp"
+          git push
