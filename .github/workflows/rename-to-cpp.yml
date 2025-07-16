@@ -1,9 +1,0 @@
-- name: Rename all files without extension to .cpp (recursive + debug)
-  run: |
-    echo "Scanning all files without extensions..."
-    find . -type f ! -name "*.*" | while read file; do
-      echo "Renaming: $file"
-      if [ -f "$file" ]; then
-        mv "$file" "${file}.cpp" || echo "Failed to rename $file"
-      fi
-    done
