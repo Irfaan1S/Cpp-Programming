@@ -29,7 +29,7 @@ public:
 
 int main(){
     
-    Teacher obj1;   //constructor gets called
+    Teacher obj1;   //constructor gets called when a new object is created
     Teacher obj2;
     Teacher obj3;
     Teacher obj4;  
